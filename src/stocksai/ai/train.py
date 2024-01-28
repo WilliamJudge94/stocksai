@@ -62,22 +62,22 @@ for epoch in range(num_epochs):
 
         optimizer.zero_grad()  # Clear the gradients from the previous iteration
 
-        # Forward pass: Compute predicted output by passing src to the model
-        output = model(src.long())
-        B, T, C = output.shape
-        output = output.view(B*T, C)  # Reshape for loss computation
-        tgt = tgt.view(B*T).long()    # Reshape target to match output dimensions
+        # # Forward pass: Compute predicted output by passing src to the model
+        # output = model(src.long())
+        # B, T, C = output.shape
+        # output = output.view(B*T, C)  # Reshape for loss computation
+        # tgt = tgt.view(B*T).long()    # Reshape target to match output dimensions
 
-        # Calculate loss
-        loss = criterion(output, tgt)
+        # # Calculate loss
+        # loss = criterion(output, tgt)
 
-        # Backward pass: Compute gradient of the loss with respect to model parameters
-        loss.backward()
+        # # Backward pass: Compute gradient of the loss with respect to model parameters
+        # loss.backward()
 
-        # Perform a single optimization step (parameter update)
-        optimizer.step()
+        # # Perform a single optimization step (parameter update)
+        # optimizer.step()
 
-        total_loss += loss.item()  # Accumulate the loss
+        # total_loss += loss.item()  # Accumulate the loss
 
     # Compute average loss for the epoch
     avg_loss = total_loss / (training_data.shape[1] // batch_size)
