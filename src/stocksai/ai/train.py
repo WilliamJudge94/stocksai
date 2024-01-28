@@ -21,7 +21,7 @@ data = hist['Close'].to_numpy()
 data = data * 10
 
 data = np.expand_dims(data, axis=0)
-data = torch.tensor(data).to(device)
+data = torch.tensor(data)
 
 training_data = data[:, :2000]
 testing_data = data[:, 2000:]
@@ -41,13 +41,6 @@ model = TransformerModel(vocab_size, d_model,
                          nhead, num_encoder_layers,
                          dim_feedforward, max_seq_length).to(device)
 
-# Generate a batch of data
-x, y = get_batch(training_data, batch_size, max_seq_length, device)
-
-# # Forward pass
-output = model(x.long().to(device))
-# print(output.shape)
-
 
 # Define Loss Function and Optimizer
 criterion = nn.CrossEntropyLoss()
@@ -55,6 +48,8 @@ optimizer = optim.AdamW(model.parameters(), lr=3e-4)
 
 # Number of epochs for training
 num_epochs = 40
+
+training_data = training_data.to(device)
 
 for epoch in range(num_epochs):
     model.train()  # Set the model to training mode
