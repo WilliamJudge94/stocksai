@@ -8,6 +8,7 @@ from tqdm import tqdm
 import torch.nn as nn
 import numpy as np
 import torch
+import logging
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -20,7 +21,7 @@ data = hist['Close'].to_numpy()
 data = data * 10
 
 data = np.expand_dims(data, axis=0)
-data = torch.tensor(data)
+data = torch.tensor(data).to(device)
 
 training_data = data[:, :2000]
 testing_data = data[:, 2000:]
