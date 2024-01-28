@@ -14,19 +14,21 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 hist = calculate_indicators(period='10y',
                             interval='1d')
 
+
 # take an input sequence
 data = hist['Close'].to_numpy()  
 data = data * 10
 
 data = np.expand_dims(data, axis=0)
-data = torch.tensor(data).to(device)  # Move data to the device
+data = torch.tensor(data)
 
 training_data = data[:, :2000]
 testing_data = data[:, 2000:]
 
+
 # Example hyperparameters
 batch_size = 10
-vocab_size = len(np.unique(data.cpu().numpy().flatten())) * 10  # Move data to CPU for numpy operations
+vocab_size = len(np.unique(data.numpy().flatten())) * 10
 d_model = 10
 nhead = 1
 num_encoder_layers = 1
@@ -42,9 +44,19 @@ model = TransformerModel(vocab_size,
                          max_seq_length,
                          device=device).to(device)
 
+# Generate a batch of data
+x, y = get_batch(training_data, batch_size, max_seq_length, device)
+
+# # Forward pass
+output = model(x.long().to(device))
+# print(output.shape)
+
+
 # Define Loss Function and Optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.AdamW(model.parameters(), lr=3e-4)
+
+training_data = training_data.to(device)
 
 # Number of epochs for training
 num_epochs = 40
@@ -61,7 +73,10 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()  # Clear the gradients from the previous iteration
 
         # Forward pass: Compute predicted output by passing src to the model
-        output = model(src.long())
+        output = model(src.long().to(device))
+        B, T, C = output.shape
+        output = output.view(B*T, C)  # Reshape for loss computation
+        tgt = tgt.view(B*T).long()    # Reshape target to match output dimensions
 
         # Calculate loss
         loss = criterion(output, tgt)
