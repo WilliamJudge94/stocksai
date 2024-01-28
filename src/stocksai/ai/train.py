@@ -34,9 +34,13 @@ dim_feedforward = 1
 max_seq_length = 30
 
 # Create and move the model to the appropriate device
-model = TransformerModel(vocab_size, d_model,
-                         nhead, num_encoder_layers,
-                         dim_feedforward, max_seq_length).to(device)
+model = TransformerModel(vocab_size,
+                         d_model,
+                         nhead,
+                         num_encoder_layers,
+                         dim_feedforward,
+                         max_seq_length,
+                         device=device).to(device)
 
 # Define Loss Function and Optimizer
 criterion = nn.CrossEntropyLoss()

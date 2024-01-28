@@ -126,7 +126,7 @@ class TransformerModel(nn.Module):
                                                           num_layers=num_encoder_layers)
 
         elif og_or_mamba == "mamba":
-          self.encoder_layer = MambaEncodingLayer(d_model, nhead)
+          self.encoder_layer = MambaEncodingLayer(d_model, nhead, device=device)
           self.transformer_encoder = nn.Sequential(*[self.encoder_layer for _ in range(num_encoder_layers)])
 
         self.decoder = nn.Linear(d_model, vocab_size)
