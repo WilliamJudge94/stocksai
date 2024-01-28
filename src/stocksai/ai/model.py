@@ -54,7 +54,7 @@ class MambaEncodingLayer(nn.Module):
     n_heads (int): The number of attention heads.
     """
 
-    def __init__(self, n_embed, n_heads) -> None:
+    def __init__(self, n_embed, n_heads, device) -> None:
         super().__init__()
         self.head_size = n_embed // n_heads
         self.sa_head = Mamba(
@@ -62,11 +62,11 @@ class MambaEncodingLayer(nn.Module):
             d_state=16,       # SSM state expansion factor
             d_conv=4,         # Local convolution width
             expand=2,         # Block expansion factor
-        )
+        ).to(device)
 
-        self.ffn = FeedForward(n_embed)
-        self.ln1 = nn.LayerNorm(n_embed)
-        self.ln2 = nn.LayerNorm(n_embed)
+        self.ffn = FeedForward(n_embed).to(device)
+        self.ln1 = nn.LayerNorm(n_embed).to(device)
+        self.ln2 = nn.LayerNorm(n_embed).to(device)
 
     def forward(self, x):
         """
@@ -99,11 +99,19 @@ class TransformerModel(nn.Module):
     decoder (nn.Linear): Linear layer for decoding.
     """
 
-    def __init__(self, vocab_size, d_model, nhead,
-                 num_encoder_layers, dim_feedforward, max_seq_length, og_or_mamba="og"):
+    def __init__(self,
+                 vocab_size,
+                 d_model,
+                 nhead,
+                 num_encoder_layers,
+                 dim_feedforward,
+                 max_seq_length,
+                 device,
+                 og_or_mamba="og"):
         
         super(TransformerModel, self).__init__()
         self.model_type = 'Transformer'
+        self.device = device
         self.token_embedding_table = nn.Embedding(vocab_size, d_model)
 
         self.position_embedding_table = nn.Embedding(max_seq_length, d_model)
@@ -135,7 +143,8 @@ class TransformerModel(nn.Module):
         """
         B, T = src.shape
         tok_emb = self.token_embedding_table(src)
-        pos_emb = self.position_embedding_table(torch.arange(T,))
+        pos_emb = self.position_embedding_table(torch.arange(T,
+                                                             device=self.device))
         x = tok_emb + pos_emb
         x = self.transformer_encoder(x)
         x = self.decoder(x)
