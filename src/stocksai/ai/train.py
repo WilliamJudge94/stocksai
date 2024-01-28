@@ -63,7 +63,7 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()  # Clear the gradients from the previous iteration
 
         # # Forward pass: Compute predicted output by passing src to the model
-        # output = model(src.long())
+        output = model(src.long())
         # B, T, C = output.shape
         # output = output.view(B*T, C)  # Reshape for loss computation
         # tgt = tgt.view(B*T).long()    # Reshape target to match output dimensions
