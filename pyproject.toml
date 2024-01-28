@@ -106,7 +106,12 @@ dependencies = [ # Optional
   "yfinance", 
   "numpy",
   "matplotlib",
-  "plotly-express"
+  "plotly-express",
+  "nbformat",
+  "torch",
+  "tqdm",
+  #"mamba-ssm == 1.1.1",
+  #"causal-conv1d <=1.0.2",
 ]
 
 # List additional groups of dependencies here (e.g. development
