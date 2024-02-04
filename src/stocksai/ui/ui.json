@@ -1,0 +1,310 @@
+{
+    "metadata": {
+        "streamsync_version": "0.3.0"
+    },
+    "components": {
+        "root": {
+            "id": "root",
+            "type": "root",
+            "content": {
+                "appName": "My App"
+            },
+            "parentId": null,
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "c0f99a9e-5004-4e75-a6c6-36f17490b134": {
+            "id": "c0f99a9e-5004-4e75-a6c6-36f17490b134",
+            "type": "page",
+            "content": {
+                "pageMode": "compact",
+                "emptinessColor": "#e9eef1"
+            },
+            "parentId": "root",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "bebc5fe9-63a7-46a7-b0fa-62303555cfaf": {
+            "id": "bebc5fe9-63a7-46a7-b0fa-62303555cfaf",
+            "type": "header",
+            "content": {
+                "text": "@{my_app.title}"
+            },
+            "parentId": "c0f99a9e-5004-4e75-a6c6-36f17490b134",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "f75icp8ug15h7a31": {
+            "id": "f75icp8ug15h7a31",
+            "type": "section",
+            "content": {
+                "title": "Starting Variables"
+            },
+            "parentId": "c0f99a9e-5004-4e75-a6c6-36f17490b134",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "5016pxhhpexp1mb9": {
+            "id": "5016pxhhpexp1mb9",
+            "type": "columns",
+            "content": {},
+            "parentId": "f75icp8ug15h7a31",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "xret7url7j7aqcdu": {
+            "id": "xret7url7j7aqcdu",
+            "type": "column",
+            "content": {
+                "title": "Principal Investment Balance Amount ($):",
+                "width": "1"
+            },
+            "parentId": "5016pxhhpexp1mb9",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "450dj6jkkg4u949r": {
+            "id": "450dj6jkkg4u949r",
+            "type": "column",
+            "content": {
+                "title": "Employee Monthly Contributions ($):",
+                "width": "1"
+            },
+            "parentId": "5016pxhhpexp1mb9",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "l1ucnj36i8ibpcvd": {
+            "id": "l1ucnj36i8ibpcvd",
+            "type": "column",
+            "content": {
+                "title": "Current Company Price of Stock ($):",
+                "width": "1"
+            },
+            "parentId": "5016pxhhpexp1mb9",
+            "position": 2,
+            "handlers": {},
+            "visible": true
+        },
+        "usbg0ksdgh6r9d3v": {
+            "id": "usbg0ksdgh6r9d3v",
+            "type": "columns",
+            "content": {},
+            "parentId": "f75icp8ug15h7a31",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "ux4ktllj29h5qzb8": {
+            "id": "ux4ktllj29h5qzb8",
+            "type": "column",
+            "content": {
+                "title": "Expected % Increase of Stock Price: (annually)",
+                "width": "1"
+            },
+            "parentId": "usbg0ksdgh6r9d3v",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "362in0yjqwvyk2he": {
+            "id": "362in0yjqwvyk2he",
+            "type": "column",
+            "content": {
+                "title": "# of years to invest:",
+                "width": "1"
+            },
+            "parentId": "usbg0ksdgh6r9d3v",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "clq7w4ed474c92ba": {
+            "id": "clq7w4ed474c92ba",
+            "type": "column",
+            "content": {
+                "title": "Current Dividend Yield (%):",
+                "width": "1"
+            },
+            "parentId": "usbg0ksdgh6r9d3v",
+            "position": 2,
+            "handlers": {},
+            "visible": true
+        },
+        "wn0zlzwp7l4ft7td": {
+            "id": "wn0zlzwp7l4ft7td",
+            "type": "numberinput",
+            "content": {
+                "label": ""
+            },
+            "parentId": "xret7url7j7aqcdu",
+            "position": 0,
+            "handlers": {},
+            "binding": {
+                "eventType": "ss-number-change",
+                "stateRef": "annual_returns.principal_amount"
+            },
+            "visible": true
+        },
+        "p2vqag5jvgk0czh4": {
+            "id": "p2vqag5jvgk0czh4",
+            "type": "numberinput",
+            "content": {
+                "label": ""
+            },
+            "parentId": "450dj6jkkg4u949r",
+            "position": 0,
+            "handlers": {},
+            "binding": {
+                "eventType": "ss-number-change",
+                "stateRef": "annual_returns.monthly_contributions"
+            },
+            "visible": true
+        },
+        "tlu5ewd0naib04gq": {
+            "id": "tlu5ewd0naib04gq",
+            "type": "numberinput",
+            "content": {
+                "label": ""
+            },
+            "parentId": "clq7w4ed474c92ba",
+            "position": 0,
+            "handlers": {},
+            "binding": {
+                "eventType": "ss-number-change",
+                "stateRef": "annual_returns.dividend_yield"
+            },
+            "visible": true
+        },
+        "dk4i0xut5ywismys": {
+            "id": "dk4i0xut5ywismys",
+            "type": "numberinput",
+            "content": {
+                "label": ""
+            },
+            "parentId": "ux4ktllj29h5qzb8",
+            "position": 0,
+            "handlers": {},
+            "binding": {
+                "eventType": "ss-number-change",
+                "stateRef": "annual_returns.yearly_stock_increase_pct"
+            },
+            "visible": true
+        },
+        "kvh4hthf8e6c5kkz": {
+            "id": "kvh4hthf8e6c5kkz",
+            "type": "numberinput",
+            "content": {
+                "label": ""
+            },
+            "parentId": "362in0yjqwvyk2he",
+            "position": 0,
+            "handlers": {},
+            "binding": {
+                "eventType": "ss-number-change",
+                "stateRef": "annual_returns.investment_years"
+            },
+            "visible": true
+        },
+        "vwe5lup9vckal6ay": {
+            "id": "vwe5lup9vckal6ay",
+            "type": "numberinput",
+            "content": {
+                "label": ""
+            },
+            "parentId": "l1ucnj36i8ibpcvd",
+            "position": 0,
+            "handlers": {},
+            "binding": {
+                "eventType": "ss-number-change",
+                "stateRef": "annual_returns.stock_price"
+            },
+            "visible": true
+        },
+        "y6kbse7d0txgu7wg": {
+            "id": "y6kbse7d0txgu7wg",
+            "type": "columns",
+            "content": {},
+            "parentId": "f75icp8ug15h7a31",
+            "position": 2,
+            "handlers": {},
+            "visible": true
+        },
+        "mvbqxwt5q1pnkjo9": {
+            "id": "mvbqxwt5q1pnkjo9",
+            "type": "column",
+            "content": {
+                "width": "1"
+            },
+            "parentId": "y6kbse7d0txgu7wg",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "8k4nf782tix7y5qs": {
+            "id": "8k4nf782tix7y5qs",
+            "type": "button",
+            "content": {
+                "text": "Calculate Return"
+            },
+            "parentId": "mvbqxwt5q1pnkjo9",
+            "position": 0,
+            "handlers": {
+                "ss-click": "calculate_annual_returns"
+            },
+            "visible": true
+        },
+        "fbhljevsxwy0g0zb": {
+            "id": "fbhljevsxwy0g0zb",
+            "type": "section",
+            "content": {
+                "title": "Breakdown DataFrame"
+            },
+            "parentId": "c0f99a9e-5004-4e75-a6c6-36f17490b134",
+            "position": 3,
+            "handlers": {},
+            "visible": true
+        },
+        "vty2mq1x37q7giuo": {
+            "id": "vty2mq1x37q7giuo",
+            "type": "dataframe",
+            "content": {
+                "dataframe": "@{annual_returns.df}",
+                "showIndex": "yes"
+            },
+            "parentId": "fbhljevsxwy0g0zb",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "60ckl46nzqaevrlj": {
+            "id": "60ckl46nzqaevrlj",
+            "type": "section",
+            "content": {
+                "title": "Investment Returns Plot By Year"
+            },
+            "parentId": "c0f99a9e-5004-4e75-a6c6-36f17490b134",
+            "position": 2,
+            "handlers": {},
+            "visible": true
+        },
+        "u4ph6fz217p5lh9m": {
+            "id": "u4ph6fz217p5lh9m",
+            "type": "plotlygraph",
+            "content": {
+                "spec": "@{annual_returns.fig}"
+            },
+            "parentId": "60ckl46nzqaevrlj",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        }
+    }
+}

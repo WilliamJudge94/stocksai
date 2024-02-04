@@ -1,6 +1,6 @@
 import torch
 
-def get_batch(data, batch_size, block_size, device, noise_stdev=5):
+def get_batch(data, batch_size, block_size, device, noise_stdev=1):
     """
     Generate a batch of data with added noise.
 
@@ -25,8 +25,8 @@ def get_batch(data, batch_size, block_size, device, noise_stdev=5):
     y = torch.stack([data[j][i+1:i+block_size+1] for j, i in zip(ix, iy)])
 
     # Add Gaussian noise
-    # noise = torch.normal(mean=0, std=noise_stdev, size=y.size())
-    # y = (y.float() + noise).round().long()
+    noise = torch.normal(mean=0, std=noise_stdev, size=y.size())
+    y = (y.float() + noise).round().long()
 
     return x.to(device), y.to(device)
 
