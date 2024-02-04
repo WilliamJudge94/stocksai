@@ -1,0 +1,38 @@
+name: Check Version Bump
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Necessary to fetch all history for comparison
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install toml
+
+      - name: Check version bump
+        run: |
+          python -c "import toml; import subprocess; \
+          subprocess.run(['git', 'fetch', 'origin', 'main'], check=True); \
+          base_pyproject = subprocess.run(['git', 'show', 'origin/main:pyproject.toml'], capture_output=True, text=True).stdout; \
+          head_pyproject = toml.load('pyproject.toml'); \
+          base_version = toml.loads(base_pyproject)['project']['version']; \
+          head_version = head_pyproject['project']['version']; \
+          assert base_version < head_version, f'Version must be increased from {base_version} to higher than {head_version}'; \
+          print('Version bump detected.')"
+
+
