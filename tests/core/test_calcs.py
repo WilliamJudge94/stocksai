@@ -1,5 +1,5 @@
 import pandas as pd
-from stocksai.calcs import _calculate_annual_returns
+from stocksai.core.calcs import _calculate_annual_returns
 
 
 def test_calculate_annual_returns():
@@ -25,13 +25,13 @@ def test_calculate_annual_returns():
     expected_output = pd.DataFrame(
         {
             "Year": [1, 2],
-            "Start Balance": ["$10,000.00", "$16,100.00"],
-            "Shares": [100.0, 110.0],
+            "Start Balance": ["$10,000.00", "$16,700.00"],
+            "Shares": [100.0, 159.05],
             "Share Price": [100.0, 105.0],
             "Contrib": ["$6,000.00", "$6,000.00"],
-            "Growth": ["$500.00", "$805.00"],
-            "Dividends": ["$200.00", "$322.00"],
-            "End Balance": ["$16,700.00", "$23,227.00"],
+            "Growth": ["$500.00", "$835.00"],
+            "Dividends": ["$200.00", "$334.00"],
+            "End Balance": [16_700.00, 23_869.00],
         }
     ).set_index("Year")
 
