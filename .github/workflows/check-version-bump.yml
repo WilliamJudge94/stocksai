@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   check-version:
     runs-on: ubuntu-latest
@@ -21,24 +22,15 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install toml  # or use poetry, depending on your project setup
+          pip install toml
 
       - name: Check version bump
         run: |
-          # Example Python script to compare versions in pyproject.toml
-          import toml
-          import subprocess
-
-          # Fetch the base branch
-          subprocess.run(["git", "fetch", "origin", "main"], check=True)
-          base_pyproject = subprocess.run(["git", "show", "origin/main:pyproject.toml"], capture_output=True, text=True).stdout
-          head_pyproject = toml.load("pyproject.toml")
-
-          base_version = toml.loads(base_pyproject)["project"]["version"]
-          head_version = head_pyproject["project"]["version"]
-
-          if base_version >= head_version:
-              print(f"::error::Version must be increased from {base_version} to higher than {head_version}")
-              exit(1)
-          else:
-              print("Version bump detected.")
+          python -c "import toml; import subprocess; \
+          subprocess.run(['git', 'fetch', 'origin', 'main'], check=True); \
+          base_pyproject = subprocess.run(['git', 'show', 'origin/main:pyproject.toml'], capture_output=True, text=True).stdout; \
+          head_pyproject = toml.load('pyproject.toml'); \
+          base_version = toml.loads(base_pyproject.decode('utf-8'))['project']['version']; \
+          head_version = head_pyproject['project']['version']; \
+          assert base_version < head_version, f'Version must be increased from {base_version} to higher than {head_version}'; \
+          print('Version bump detected.')"
