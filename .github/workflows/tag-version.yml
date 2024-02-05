@@ -9,6 +9,7 @@ on:
 
 jobs:
   tag-version:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -37,5 +38,5 @@ jobs:
             git config --local user.name "GitHub Action"
             
             echo "Creating and pushing tag for version $version..."
-            git tag $version
-            git push origin $version
+            git tag "$version"
+            git push origin "$version"
