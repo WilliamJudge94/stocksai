@@ -3,7 +3,7 @@ name: Tag Version After Checks
 # Only works in main branch
 on:
     workflow_run:
-      workflows: ["Check Version Bump"]
+      workflows: ["Package Tests"]
       types:
         - completed
 
