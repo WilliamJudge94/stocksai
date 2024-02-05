@@ -22,10 +22,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install toml
 
-      - name: Extract version
+      - name: Extract version and Tag
         id: extract_version
         run: |
             echo "Extracting version..."
             version=$(python -c "import toml; pyproject = toml.load('pyproject.toml'); print('Version Number:', pyproject['project']['version'])")
             echo "VERSION=$version" >> $GITHUB_ENV
             echo "The version is $version"
+
+            echo "Configuring Git user..."
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            
+            echo "Creating and pushing tag for version $version..."
