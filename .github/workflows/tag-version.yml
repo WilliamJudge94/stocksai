@@ -2,14 +2,12 @@ name: Tag Version After Checks
 
 on:
   workflow_run:
-    workflows: ["Check Version Bump", ]
-    branches: '**'
+    workflows: ["Check Version Bump"]
     types:
       - completed
 
 jobs:
   tag-version:
-    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,14 +24,13 @@ jobs:
           pip install toml
 
       - name: Extract version
-        id: extract_version
         run: |
           echo "Extracting version..."
           version=$(python -c "import toml; pyproject = toml.load('pyproject.toml'); print(pyproject['project']['version'])")
           echo "VERSION=$version" >> $GITHUB_ENV
       
       - name: Tagging
-        if: github.ref == 'refs/heads/main'
+        if: github.event.workflow_run.conclusion == 'success'
         run: |
           echo "Creating tag for version ${{ env.VERSION }}"
           git config --local user.email "action@github.com"
