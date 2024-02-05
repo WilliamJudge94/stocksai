@@ -8,7 +8,6 @@ on:
         - completed
 
 jobs:
-  permissions: write-all
   tag-version:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
