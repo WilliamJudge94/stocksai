@@ -28,3 +28,4 @@ jobs:
           echo "Extracting version..."
           version=$(python -c "import toml; pyproject = toml.load('pyproject.toml'); print(pyproject['project']['version'])")
           echo "VERSION=$version" >> $GITHUB_ENV
+          echo "The version is ${{ env.VERSION }}"
