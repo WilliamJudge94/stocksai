@@ -27,6 +27,8 @@ jobs:
 
       - name: Extract version and Tag
         id: extract_version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
             echo "Extracting version..."
             version=$(python -c "import toml; pyproject = toml.load('pyproject.toml'); print(pyproject['project']['version'])")
