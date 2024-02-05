@@ -2,8 +2,8 @@ name: Tag Version After Checks
 
 on:
   workflow_run:
-    workflows: ["Check Version Bump"]
-    # branches: [main]
+    workflows: ["Check Version Bump", ]
+    branches: ['**']
     types:
       - completed
 
