@@ -1,5 +1,6 @@
 name: Tag Version After Checks
 
+# Only works in main branch
 on:
     workflow_run:
       workflows: ["Check Version Bump"]
@@ -36,3 +37,5 @@ jobs:
             git config --local user.name "GitHub Action"
             
             echo "Creating and pushing tag for version $version..."
+            git tag $version
+            git push origin $version
