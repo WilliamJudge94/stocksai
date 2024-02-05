@@ -2,7 +2,7 @@ name: Tag Version After Checks
 
 on:
   workflow_run:
-    workflows: ["Check Version Bump"]
+    workflows: ["Check Version Bump", "Package Tests"]
     types:
       - completed
 
@@ -31,11 +31,11 @@ jobs:
           version=$(python -c "import toml; pyproject = toml.load('pyproject.toml'); print(pyproject['project']['version'])")
           echo "VERSION=$version" >> $GITHUB_ENV
       
-      - name: Tagging
-        if: github.ref == 'refs/heads/main'
-        run: |
-          echo "Creating tag for version ${{ env.VERSION }}"
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git tag ${{ env.VERSION }}
-          git push origin ${{ env.VERSION }}
+    #   - name: Tagging
+    #     if: github.ref == 'refs/heads/main'
+    #     run: |
+    #       echo "Creating tag for version ${{ env.VERSION }}"
+    #       git config --local user.email "action@github.com"
+    #       git config --local user.name "GitHub Action"
+    #       git tag ${{ env.VERSION }}
+    #       git push origin ${{ env.VERSION }}
