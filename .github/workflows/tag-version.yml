@@ -1,8 +1,8 @@
-name: Tag Version
+name: Tag Version After Checks
 
 on:
   workflow_run:
-    workflows: ["Check Version Bump", "Package Tests"]
+    workflows: ["Check Version Bump", "Python Package"]
     branches: [main]
     types:
       - completed
@@ -23,20 +23,20 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install toml # or tomli for Python 3.11+
-      
-      - name: Extract version and tag
+          pip install toml
+
+      - name: Extract version
+        id: extract_version
         run: |
-          import toml
-          
-          # Load the project version from pyproject.toml
-          pyproject = toml.load("pyproject.toml")
-          version = pyproject["project"]["version"]
-          
-          # Tagging
-          echo "Creating tag for version $version"
+          echo "Extracting version..."
+          version=$(python -c "import toml; pyproject = toml.load('pyproject.toml'); print(pyproject['project']['version'])")
+          echo "VERSION=$version" >> $GITHUB_ENV
+      
+      - name: Tagging
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "Creating tag for version ${{ env.VERSION }}"
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git tag $version
-          git push origin $version
-        shell: python
+          git tag ${{ env.VERSION }}
+          git push origin ${{ env.VERSION }}

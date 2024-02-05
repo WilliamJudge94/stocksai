@@ -1,7 +1,7 @@
 [project]
 
 name = "stocksai"
-version = "0.0.3" 
+version = "0.0.4" 
 description = "Stocks with AI" 
 readme = "README.md"
 requires-python = ">=3.7"
