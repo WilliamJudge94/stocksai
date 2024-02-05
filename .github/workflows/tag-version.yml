@@ -8,6 +8,7 @@ on:
 
 jobs:
   tag-version:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -24,16 +25,17 @@ jobs:
           pip install toml
 
       - name: Extract version
+        id: extract_version
         run: |
           echo "Extracting version..."
           version=$(python -c "import toml; pyproject = toml.load('pyproject.toml'); print(pyproject['project']['version'])")
           echo "VERSION=$version" >> $GITHUB_ENV
       
       - name: Tagging
-        if: github.event.workflow_run.conclusion == 'success'
+        if: github.ref == 'refs/heads/main'
         run: |
           echo "Creating tag for version ${{ env.VERSION }}"
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git tag ${{ env.VERSION }}
-        #   git push origin ${{ env.VERSION }}
+          git push origin ${{ env.VERSION }}
