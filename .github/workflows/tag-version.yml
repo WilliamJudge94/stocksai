@@ -22,10 +22,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install toml
 
-      - name: Extract version
+        - name: Extract version
         id: extract_version
         run: |
-          echo "Extracting version..."
-          version=$(python -c "import toml; pyproject = toml.load('pyproject.toml'); print(f" Version Number: {pyproject['project']['version']}")
-          echo "VERSION=$version" >> $GITHUB_ENV
-          echo "The version is ${{ env.VERSION }}"
+            echo "Extracting version..."
+            version=$(python -c "import toml; pyproject = toml.load('pyproject.toml'); print('Version Number:', pyproject['project']['version'])")
+            echo "VERSION=$version" >> $GITHUB_ENV
+            echo "The version is $version"
