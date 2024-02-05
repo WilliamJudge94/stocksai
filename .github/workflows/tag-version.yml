@@ -2,7 +2,7 @@ name: Tag Version After Checks
 
 on:
   workflow_run:
-    workflows: ["Check Version Bump", "Python Package"]
+    workflows: ["Check Version Bump", ]
     branches: [main]
     types:
       - completed
