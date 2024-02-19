@@ -39,12 +39,12 @@ dependencies = [
   "matplotlib",
   "plotly-express",
   "nbformat",
-  "torch",
+  # "torch",
   "tqdm",
   "streamsync",
   "pyarrow",
-  #"mamba-ssm == 1.1.1",
-  #"causal-conv1d <=1.0.2",
+  # "mamba-ssm == 1.1.1",
+  # "causal-conv1d <=1.0.2",
 ]
 
 [project.optional-dependencies]
