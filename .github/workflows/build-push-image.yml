@@ -1,8 +1,11 @@
 name: Build and Push Docker Image
 
+# Only works in main branch
 on:
-  push:
-    branches: [ main ]
+    workflow_run:
+      workflows: ["Package Tests", "Tag Version After Checks"]
+      types:
+        - completed
 
 jobs:
   build:
