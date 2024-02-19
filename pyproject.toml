@@ -1,7 +1,7 @@
 [project]
 
 name = "stocksai"
-version = "0.0.6" 
+version = "0.0.7" 
 description = "Stocks with AI" 
 readme = "README.md"
 requires-python = ">=3.7"
@@ -39,12 +39,12 @@ dependencies = [
   "matplotlib",
   "plotly-express",
   "nbformat",
-  "torch",
+  # "torch",
   "tqdm",
   "streamsync",
   "pyarrow",
-  #"mamba-ssm == 1.1.1",
-  #"causal-conv1d <=1.0.2",
+  # "mamba-ssm == 1.1.1",
+  # "causal-conv1d <=1.0.2",
 ]
 
 [project.optional-dependencies]
@@ -55,6 +55,10 @@ dev = [
 ]
 test = [
     "pytest-cov ~=3.0.0",
+]
+
+all = [
+    "stocksai[dev, test]",
 ]
 
 [tool.pytest.ini_options]
