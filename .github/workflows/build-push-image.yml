@@ -2,7 +2,7 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ feature/include_docker ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -24,4 +24,3 @@ jobs:
         context: .
         push: true
         tags: williamjudge94/stocksai:latest
-        
