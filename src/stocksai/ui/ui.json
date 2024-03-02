@@ -43,8 +43,8 @@
             "content": {
                 "title": "Starting Variables"
             },
-            "parentId": "c0f99a9e-5004-4e75-a6c6-36f17490b134",
-            "position": 1,
+            "parentId": "ycjya228i17rf0oz",
+            "position": 0,
             "handlers": {},
             "visible": true
         },
@@ -267,8 +267,8 @@
             "content": {
                 "title": "Breakdown DataFrame"
             },
-            "parentId": "c0f99a9e-5004-4e75-a6c6-36f17490b134",
-            "position": 3,
+            "parentId": "60ckl46nzqaevrlj",
+            "position": 1,
             "handlers": {},
             "visible": true
         },
@@ -290,8 +290,8 @@
             "content": {
                 "title": "Investment Returns Plot By Year"
             },
-            "parentId": "c0f99a9e-5004-4e75-a6c6-36f17490b134",
-            "position": 2,
+            "parentId": "ycjya228i17rf0oz",
+            "position": 1,
             "handlers": {},
             "visible": true
         },
@@ -303,6 +303,119 @@
             },
             "parentId": "60ckl46nzqaevrlj",
             "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "hclamqa584xhxsbe": {
+            "id": "hclamqa584xhxsbe",
+            "type": "section",
+            "content": {
+                "title": "Section Title"
+            },
+            "parentId": "c0f99a9e-5004-4e75-a6c6-36f17490b134",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "ej513gof7g85isz3": {
+            "id": "ej513gof7g85isz3",
+            "type": "tabs",
+            "content": {},
+            "parentId": "hclamqa584xhxsbe",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "ycjya228i17rf0oz": {
+            "id": "ycjya228i17rf0oz",
+            "type": "tab",
+            "content": {
+                "name": "Fire Calc"
+            },
+            "parentId": "ej513gof7g85isz3",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "91p5ud6vmrul1xkv": {
+            "id": "91p5ud6vmrul1xkv",
+            "type": "tab",
+            "content": {
+                "name": "Forecast AI"
+            },
+            "parentId": "ej513gof7g85isz3",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "jdt2ewa6b30mawds": {
+            "id": "jdt2ewa6b30mawds",
+            "type": "columns",
+            "content": {},
+            "parentId": "91p5ud6vmrul1xkv",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "1ac45sj9o4spm5gi": {
+            "id": "1ac45sj9o4spm5gi",
+            "type": "column",
+            "content": {
+                "width": "1"
+            },
+            "parentId": "jdt2ewa6b30mawds",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "kfvqr16cu3m5fwvx": {
+            "id": "kfvqr16cu3m5fwvx",
+            "type": "column",
+            "content": {
+                "width": "1"
+            },
+            "parentId": "jdt2ewa6b30mawds",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "01f7kmxoa9wsb1rh": {
+            "id": "01f7kmxoa9wsb1rh",
+            "type": "textinput",
+            "content": {
+                "label": "Stock Ticker To Forecast",
+                "placeholder": "AAPL"
+            },
+            "parentId": "1ac45sj9o4spm5gi",
+            "position": 0,
+            "handlers": {},
+            "binding": {
+                "eventType": "ss-change",
+                "stateRef": "forecast-ai.ticker"
+            },
+            "visible": true
+        },
+        "s71vevjfh3h6bb4x": {
+            "id": "s71vevjfh3h6bb4x",
+            "type": "button",
+            "content": {
+                "text": "Run AI"
+            },
+            "parentId": "kfvqr16cu3m5fwvx",
+            "position": 0,
+            "handlers": {
+                "ss-click": "run_ai"
+            },
+            "visible": true
+        },
+        "5ntjxpsl1a2svf4q": {
+            "id": "5ntjxpsl1a2svf4q",
+            "type": "plotlygraph",
+            "content": {
+                "spec": "@{forecast-ai.fig}"
+            },
+            "parentId": "91p5ud6vmrul1xkv",
+            "position": 1,
             "handlers": {},
             "visible": true
         }

@@ -1,5 +1,7 @@
 import streamsync as ss
-from stocksai.core.calcs import calculate_annual_returns
+import plotly.express as px
+from stocksai.core.calcs import (calculate_annual_returns,
+                                 calculate_indicators)
 
 # This is a placeholder to get you started or refresh your memory.
 # Delete it or adapt it as necessary.
@@ -27,6 +29,19 @@ def increment(state):
     print(f"The counter has been incremented.")
     _update_message(state)
 
+def run_ai(state):
+    hist = calculate_indicators(ticker_symbol='AAPL', 
+                                period='10y',
+                                interval='1d')
+    
+    state['forecast-ai']['fig'] = px.line(hist[30:],
+                                          y=['Close',
+                                          '30d_SMA_pctchange',
+                                          'Upper_BB',
+                                          'Lower_BB',
+                                          'RSI'])
+
+
 
 # Initialise the state
 
@@ -47,6 +62,7 @@ initial_state = ss.init_state(
             "investment_years": 30,
             "dividend_yield": 0,
         },
+        "forecast-ai": {'ticker': 'AAPL'},
     }
 )
 
