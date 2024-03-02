@@ -1,8 +1,7 @@
 from huggingface_hub import from_pretrained_keras
 from utils import anomaly_prep
 
-model = from_pretrained_keras("keras-io/
-time-series-anomaly-detection-autoencoder")
+model = from_pretrained_keras("keras-io/time-series-anomaly-detection-autoencoder")
 
 prep = dict(anomaly=anomaly_prep)
 

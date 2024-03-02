@@ -106,7 +106,7 @@
             "id": "ux4ktllj29h5qzb8",
             "type": "column",
             "content": {
-                "title": "Expected % Increase of Stock Price: (annually)",
+                "title": "Expected % Increase of Stock Price",
                 "width": "1"
             },
             "parentId": "usbg0ksdgh6r9d3v",
@@ -254,7 +254,7 @@
             "content": {
                 "text": "Calculate Return"
             },
-            "parentId": "mvbqxwt5q1pnkjo9",
+            "parentId": "ezbqpd81ofjjau2v",
             "position": 0,
             "handlers": {
                 "ss-click": "calculate_annual_returns"
@@ -291,7 +291,7 @@
                 "title": "Investment Returns Plot By Year"
             },
             "parentId": "ycjya228i17rf0oz",
-            "position": 1,
+            "position": 2,
             "handlers": {},
             "visible": true
         },
@@ -416,6 +416,170 @@
             },
             "parentId": "91p5ud6vmrul1xkv",
             "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "2epa69weqzucb4vw": {
+            "id": "2epa69weqzucb4vw",
+            "type": "numberinput",
+            "content": {
+                "label": "Annual Spend",
+                "placeholder": "100000"
+            },
+            "parentId": "day34wdvtcrhcign",
+            "position": 0,
+            "handlers": {},
+            "binding": {
+                "eventType": "ss-number-change",
+                "stateRef": "annual_returns.annual_spend"
+            },
+            "visible": true
+        },
+        "lfhj97j2apzl30fu": {
+            "id": "lfhj97j2apzl30fu",
+            "type": "columns",
+            "content": {},
+            "parentId": "mvbqxwt5q1pnkjo9",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "day34wdvtcrhcign": {
+            "id": "day34wdvtcrhcign",
+            "type": "column",
+            "content": {
+                "width": "1"
+            },
+            "parentId": "lfhj97j2apzl30fu",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "ezbqpd81ofjjau2v": {
+            "id": "ezbqpd81ofjjau2v",
+            "type": "column",
+            "content": {
+                "width": "1"
+            },
+            "parentId": "lfhj97j2apzl30fu",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "nzd6l7o2modnb4ib": {
+            "id": "nzd6l7o2modnb4ib",
+            "type": "section",
+            "content": {
+                "title": "Section Title"
+            },
+            "parentId": "ycjya228i17rf0oz",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "uc2gs81wnkilupjk": {
+            "id": "uc2gs81wnkilupjk",
+            "type": "columns",
+            "content": {},
+            "parentId": "nzd6l7o2modnb4ib",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "o9cdq63ja8vnsljn": {
+            "id": "o9cdq63ja8vnsljn",
+            "type": "column",
+            "content": {
+                "width": "1"
+            },
+            "parentId": "uc2gs81wnkilupjk",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "73901m3u9nvfciqi": {
+            "id": "73901m3u9nvfciqi",
+            "type": "column",
+            "content": {
+                "width": "1"
+            },
+            "parentId": "uc2gs81wnkilupjk",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "4qk0kn6i69yw3qrx": {
+            "id": "4qk0kn6i69yw3qrx",
+            "type": "columns",
+            "content": {},
+            "parentId": "nzd6l7o2modnb4ib",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "h96evwhfajtw6prh": {
+            "id": "h96evwhfajtw6prh",
+            "type": "column",
+            "content": {
+                "width": "1"
+            },
+            "parentId": "4qk0kn6i69yw3qrx",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "t454n2sshrgu46y3": {
+            "id": "t454n2sshrgu46y3",
+            "type": "column",
+            "content": {
+                "width": "1"
+            },
+            "parentId": "4qk0kn6i69yw3qrx",
+            "position": 1,
+            "handlers": {},
+            "visible": true
+        },
+        "ivpbhpsvag6c024f": {
+            "id": "ivpbhpsvag6c024f",
+            "type": "text",
+            "content": {
+                "text": "Fire Number is: @{annual_returns.fire_number}"
+            },
+            "parentId": "o9cdq63ja8vnsljn",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "ozub9y1upevkfzvr": {
+            "id": "ozub9y1upevkfzvr",
+            "type": "text",
+            "content": {
+                "text": "Coast Fire Number is: @{annual_returns.coast_fire_number}"
+            },
+            "parentId": "73901m3u9nvfciqi",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "zbs9xo4ngavgai7m": {
+            "id": "zbs9xo4ngavgai7m",
+            "type": "text",
+            "content": {
+                "text": "Fire Date is: @{annual_returns.fire_date}"
+            },
+            "parentId": "h96evwhfajtw6prh",
+            "position": 0,
+            "handlers": {},
+            "visible": true
+        },
+        "t8tt8mewgx0jtcah": {
+            "id": "t8tt8mewgx0jtcah",
+            "type": "text",
+            "content": {
+                "text": "Coast Fire Date is: @{annual_returns.coast_fire_date}"
+            },
+            "parentId": "t454n2sshrgu46y3",
+            "position": 0,
             "handlers": {},
             "visible": true
         }

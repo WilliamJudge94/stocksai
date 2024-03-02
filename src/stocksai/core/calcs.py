@@ -3,8 +3,7 @@ import pandas as pd
 import yfinance as yf
 import plotly.express as px
 
-warnings.simplefilter(action='ignore',
-                      category=FutureWarning)
+warnings.simplefilter(action="ignore", category=FutureWarning)
 
 pd.set_option("display.float_format", "{:.2f}".format)
 
@@ -30,9 +29,43 @@ def calculate_annual_returns(
         dividend_yield,
     )
 
-    state["annual_returns"]["df"] = df
+    fig = px.line(df, y="End Balance")
+    fig.update_layout(yaxis_tickprefix="$", yaxis_tickformat=",.2f")
+    fire_number = float(small_state["annual_spend"] / 0.04)
+    coast_fire_number = float(small_state["annual_spend"] * 5.85)
 
-    state["annual_returns"]["fig"] = px.line(df, y="End Balance")
+    # draw horizontal line for fire number
+    fig.add_shape(
+        dict(
+            type="line",
+            x0=1,
+            y0=fire_number,
+            x1=investment_years,
+            y1=fire_number,
+            line=dict(color="Red", width=3),
+        )
+    )
+
+    # draw horizontal line for coast fire number
+    fig.add_shape(
+        dict(
+            type="line",
+            x0=1,
+            y0=coast_fire_number,
+            x1=investment_years,
+            y1=coast_fire_number,
+            line=dict(color="Green", width=3),
+        )
+    )
+
+    state["annual_returns"]["fire_number"] = fire_number
+    state["annual_returns"]["coast_fire_number"] = coast_fire_number
+    # state["annual_returns"]["fire_date"] = find_fire_date
+    # state["annual_returns"]["coast_fire_date"] = find_coast_fire_date
+
+    df["End Balance"] = df["End Balance"].map("${:,.2f}".format)
+    state["annual_returns"]["df"] = df
+    state["annual_returns"]["fig"] = fig
 
 
 def _calculate_annual_returns(
@@ -71,7 +104,7 @@ def _calculate_annual_returns(
     records = []
     total_shares = principal_amount / stock_price
 
-    for year in range(1, investment_years + 1):
+    for year in range(1, int(investment_years) + 1):
         start_balance = total_shares * stock_price
         contrib = monthly_contributions * 12
         growth = start_balance * (yearly_stock_increase_pct / 100)
@@ -111,13 +144,15 @@ def _calculate_annual_returns(
 
     return return_df
 
-def calculate_indicators(ticker_symbol='AAPL',
-                         period='1y',
-                         interval='1d',
-                         sma_window=30,
-                         bb_std_dev=2,
-                         rsi_window=14):
-    
+
+def calculate_indicators(
+    ticker_symbol="AAPL",
+    period="1y",
+    interval="1d",
+    sma_window=30,
+    bb_std_dev=2,
+    rsi_window=14,
+):
     """
     Calculate the Simple Moving Average (SMA), Bollinger Bands, and Relative Strength Index (RSI) for a given stock.
 
@@ -135,21 +170,26 @@ def calculate_indicators(ticker_symbol='AAPL',
     try:
         # Fetch historical stock data
         stock = yf.Ticker(ticker_symbol)
-        data = stock.history(period=period,
-                             interval=interval)
+        data = stock.history(period=period, interval=interval)
     except Exception as e:
         print(f"An error occurred while fetching the stock data: {e}")
         return None
 
     # Calculate Simple Moving Average (SMA)
-    data[f'{sma_window}d_SMA'] = data['Close'].rolling(window=sma_window).mean()
+    data[f"{sma_window}d_SMA"] = data["Close"].rolling(window=sma_window).mean()
 
     # Calculate Bollinger Bands
-    data['Upper_BB'] = data[f'{sma_window}d_SMA'] + bb_std_dev * data['Close'].rolling(window=sma_window).std()
-    data['Lower_BB'] = data[f'{sma_window}d_SMA'] - bb_std_dev * data['Close'].rolling(window=sma_window).std()
+    data["Upper_BB"] = (
+        data[f"{sma_window}d_SMA"]
+        + bb_std_dev * data["Close"].rolling(window=sma_window).std()
+    )
+    data["Lower_BB"] = (
+        data[f"{sma_window}d_SMA"]
+        - bb_std_dev * data["Close"].rolling(window=sma_window).std()
+    )
 
     # Calculate Relative Strength Index (RSI)
-    close_diff = data['Close'].diff(1)
+    close_diff = data["Close"].diff(1)
     gains = close_diff.where(close_diff > 0, 0)
     losses = -close_diff.where(close_diff < 0, 0)
 
@@ -157,12 +197,11 @@ def calculate_indicators(ticker_symbol='AAPL',
     avg_loss = losses.rolling(window=rsi_window).mean()
 
     rs = avg_gain / avg_loss
-    data['RSI'] = 100 - (100 / (1 + rs))
-
+    data["RSI"] = 100 - (100 / (1 + rs))
 
     # Normalize the data
-    for col in ['Close', f'{sma_window}d_SMA', 'Upper_BB', 'Lower_BB']:
-        data[col + '_pctchange'] = data[col].pct_change() * 100
+    for col in ["Close", f"{sma_window}d_SMA", "Upper_BB", "Lower_BB"]:
+        data[col + "_pctchange"] = data[col].pct_change() * 100
 
     # mean, std = data.RSI.mean(), data.RSI.std()
     # data.RSI = (data.RSI - mean)/std
